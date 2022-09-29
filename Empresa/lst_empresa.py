@@ -36,4 +36,7 @@ class LstEmpresa:
            print(aux.abreviatura_empresa)
            print('----------------------Puntos atencion------------------')
            aux.lst_punto_atencion.recorrer()
+           print('')
+           print('----------------------Transacciones------------------')
+           aux.lst_transacciones.recorrer()
            aux = aux.siguiente

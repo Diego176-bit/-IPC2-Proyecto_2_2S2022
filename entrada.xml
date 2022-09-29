@@ -2,25 +2,25 @@
 <listaEmpresas>
     <empresa id ="1">
         <nombre> moises </nombre>
-        <abreviatura> abreviatura </abreviatura>
+        <abreviatura> MCSA </abreviatura>
             <listaPuntosAtencion>
                 <puntoAtencion id="001">
                     <nombre> Bosques </nombre>
                     <direccion> zona 4 de mixco </direccion>
                     <listaEscritorios>
                         <escritorio id="Moises Conde"> 
-                        <identificacion> 1 </identificacion>
-                        <encargado> nombreEncargado </encargado>
+                            <identificacion> 1 </identificacion>
+                            <encargado> nombreEncargado </encargado>
                         <!-- AQUI PUEDE VENIR VARIOS ESCRITORIOS -->
                         </escritorio>
                         <escritorio id="Antonio Hernadez"> 
-                        <identificacion> 2 </identificacion>
-                        <encargado> nombreEncargado </encargado>
+                            <identificacion> 2 </identificacion>
+                            <encargado> nombreEncargado </encargado>
                         <!-- AQUI PUEDE VENIR VARIOS ESCRITORIOS -->
                         </escritorio>
                         <escritorio id="Moises Antonio"> 
-                        <identificacion> 3 </identificacion>
-                        <encargado> nombreEncargado </encargado>
+                            <identificacion> 3 </identificacion>
+                            <encargado> nombreEncargado </encargado>
                         <!-- AQUI PUEDE VENIR VARIOS ESCRITORIOS -->
                         </escritorio>
                     </listaEscritorios>
@@ -70,15 +70,15 @@
             </listaPuntosAtencion>
             <listaTransacciones>
                 <transaccion id="t001"> 
-                <nombre> transaccion1 </nombre>
-                <tiempoAtencion> 2 </tiempoAtencion>
+                    <nombre> transaccion1 </nombre>
+                    <tiempoAtencion> 2 </tiempoAtencion>
                 </transaccion>
                 <transaccion id="t002"> 
-                <nombre> transaccion2 </nombre>
-                <tiempoAtencion> 5 </tiempoAtencion>
+                    <nombre> transaccion2 </nombre>
+                    <tiempoAtencion> 5 </tiempoAtencion>
                 </transaccion>
-                <transaccion id="t0003"> 
-                <nombre> transaccion3 </nombre>
+                    <transaccion id="t0003"> 
+                    <nombre> transaccion3 </nombre>
                 <tiempoAtencion> 10 </tiempoAtencion>
                 </transaccion>
             </listaTransacciones>
