@@ -1,4 +1,4 @@
-from nodo_transaccion_cliente import NodoTransaccionCliente
+from TransaccionesClientes.nodo_transaccion_cliente import NodoTransaccionCliente
 
 class LstTransaccionesClientes:
     def __init__(self) -> None:

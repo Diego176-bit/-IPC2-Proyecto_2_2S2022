@@ -26,3 +26,11 @@ class LstTransacciones:
            print(aux.nombre_transaccion)
            print(aux.tiempo)
            aux = aux.siguiente
+           
+    def buscar_transaccion(self, id_transaccion):
+        aux = self.primero
+        while aux != None:
+            if aux.id_transaccion == id_transaccion:
+                return aux
+            aux = aux.siguiente
+        return None

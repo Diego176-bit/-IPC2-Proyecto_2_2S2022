@@ -1,18 +1,40 @@
 <?xml version="1.0"?>
 <listadoInicial>
-    <configInicial id="$codigoConfiguracion" idEmpresa="1" idPunto="001">
+    <configInicial id="1" idEmpresa="1" idPunto="001">
         <escritoriosActivos>
-            <escritorio idEscritorio="$codEscritorio"/>
-            <escritorio idEscritorio="$codEscritorio"/>
+            <escritorio idEscritorio="esc1"/>
+            <escritorio idEscritorio="esc2"/>
         </escritoriosActivos>
         <listadoClientes>
-            <cliente dpi="$DPI">
-                <nombre> $nombreCliente </nombre>
+            <cliente dpi="3003">
+                <nombre> diego medina</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="tr01" cantidad="cantTrans"/>
-                    <transaccion idTransaccion="tr02" cantidad="cantTrans"/>
+                    <transaccion idTransaccion="t001" cantidad="1"/> <!-- 12mins -->
+                    <transaccion idTransaccion="t002" cantidad="2"/>
                 </listadoTransacciones>
             </cliente>
+            <cliente dpi="3004">
+                <nombre> diego medina</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="t001" cantidad="1"/> <!-- 12mins -->
+                    <transaccion idTransaccion="t002" cantidad="2"/>
+                </listadoTransacciones>
+            </cliente>
+            <cliente dpi="3005">
+                <nombre> diego medina</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="t001" cantidad="1"/> <!-- 17mins -->
+                    <transaccion idTransaccion="t002" cantidad="3"/>
+                </listadoTransacciones>
+            </cliente>
+            <cliente dpi="3006">
+                <nombre> diego medina</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="t001" cantidad="1"/> <!-- 22mins -->
+                    <transaccion idTransaccion="t002" cantidad="4"/>
+                </listadoTransacciones>
+            </cliente>
+            
             
         </listadoClientes>
     </configInicial>

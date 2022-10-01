@@ -37,3 +37,21 @@ class LstEscritorio:
            print('')
            print('')
            aux = aux.siguiente
+    
+    def escritorios_activos(self):
+        aux = self.primero
+        cantidad_escritorios_activos = 0
+        while aux != None:
+            if aux.esta_activo == True:
+                cantidad_escritorios_activos +=1
+            aux = aux.siguiente
+        return cantidad_escritorios_activos
+
+    def escritorios_desactivados(self):
+        aux = self.primero
+        cantidad_escritorios_desactivados = 0
+        while aux != None:
+            if aux.esta_activo == False:
+                cantidad_escritorios_desactivados +=1
+            aux = aux.siguiente
+        return cantidad_escritorios_desactivados

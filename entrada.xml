@@ -8,17 +8,17 @@
                     <nombre> Bosques </nombre>
                     <direccion> zona 4 de mixco </direccion>
                     <listaEscritorios>
-                        <escritorio id="Moises Conde"> 
+                        <escritorio id="esc1"> 
                             <identificacion> 1 </identificacion>
                             <encargado> nombreEncargado </encargado>
                         <!-- AQUI PUEDE VENIR VARIOS ESCRITORIOS -->
                         </escritorio>
-                        <escritorio id="Antonio Hernadez"> 
+                        <escritorio id="esc2"> 
                             <identificacion> 2 </identificacion>
                             <encargado> nombreEncargado </encargado>
                         <!-- AQUI PUEDE VENIR VARIOS ESCRITORIOS -->
                         </escritorio>
-                        <escritorio id="Moises Antonio"> 
+                        <escritorio id="esc3"> 
                             <identificacion> 3 </identificacion>
                             <encargado> nombreEncargado </encargado>
                         <!-- AQUI PUEDE VENIR VARIOS ESCRITORIOS -->
@@ -77,7 +77,7 @@
                     <nombre> transaccion2 </nombre>
                     <tiempoAtencion> 5 </tiempoAtencion>
                 </transaccion>
-                    <transaccion id="t0003"> 
+                    <transaccion id="t003"> 
                     <nombre> transaccion3 </nombre>
                 <tiempoAtencion> 10 </tiempoAtencion>
                 </transaccion>

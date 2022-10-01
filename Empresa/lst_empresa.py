@@ -29,14 +29,11 @@ class LstEmpresa:
         return None
     def recorrer(self):
        aux = self.primero
-       
        while aux != None:
-           print(aux.id_empresa)
-           print(aux.nombre_empresa)
-           print(aux.abreviatura_empresa)
-           print('----------------------Puntos atencion------------------')
-           aux.lst_punto_atencion.recorrer()
+           print('--------------------------------------')
+           print(f'Id: {aux.id_empresa}')
+           print(f'Nombre: {aux.nombre_empresa}')
+           print(f'Abreviatura: {aux.abreviatura_empresa}')
+           print('--------------------------------------')
            print('')
-           print('----------------------Transacciones------------------')
-           aux.lst_transacciones.recorrer()
            aux = aux.siguiente

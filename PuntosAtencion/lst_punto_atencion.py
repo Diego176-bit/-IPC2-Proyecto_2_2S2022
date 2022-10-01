@@ -30,9 +30,11 @@ class LstPuntoAtencion:
        aux = self.primero
        
        while aux != None:
-           print(aux.id_punto_atencion)
-           print(aux.nombre_punto_atencion)
-           print(aux.direccion_punto_atencion)
-           print('-------------------escritorio---------------')
-           aux.lst_escritorio.recorrer()
+           print('-------------------------------------------------------')
+           print(f'Id punto de atención: {aux.id_punto_atencion}')
+           print(f'Nombre punto de atención: {aux.nombre_punto_atencion}')
+           print(f'Dirección punto de atención: {aux.direccion_punto_atencion}')
+           print('-------------------------------------------------------')
+           print('')
+           
            aux = aux.siguiente
