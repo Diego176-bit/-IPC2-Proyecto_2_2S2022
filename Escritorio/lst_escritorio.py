@@ -45,8 +45,16 @@ class LstEscritorio:
             if aux.esta_activo == True:
                 cantidad_escritorios_activos +=1
             aux = aux.siguiente
-        return cantidad_escritorios_activos
-
+        return int(cantidad_escritorios_activos)
+    def lista_escritorios_activos(self):
+        aux = self.primero
+        lst_escritorios_activos =[]
+        while aux != None:
+            if aux.esta_activo == True:
+                lst_escritorios_activos.append(aux)
+            aux = aux.siguiente
+        return lst_escritorios_activos
+    
     def escritorios_desactivados(self):
         aux = self.primero
         cantidad_escritorios_desactivados = 0
@@ -55,3 +63,22 @@ class LstEscritorio:
                 cantidad_escritorios_desactivados +=1
             aux = aux.siguiente
         return cantidad_escritorios_desactivados
+    """ DESACTIVAR Y ACTIVAR ESCRITORIOS """
+    def activar_escritorio(self, id_escritorio):
+        aux = self.primero
+        while aux != None:
+            if aux.id_escritorio == id_escritorio and aux.esta_activo == False:
+                aux.esta_activo = True
+                return True    
+            aux = aux.siguiente
+        return False
+    
+    def desactivar_escritorio(self, id_escritorio):
+        aux = self.primero
+        while aux != None:
+            if aux.id_escritorio == id_escritorio and aux.esta_activo == True:
+                aux.esta_activo = False
+                return True
+            aux = aux.siguiente
+        return False
+                

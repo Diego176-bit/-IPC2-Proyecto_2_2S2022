@@ -48,8 +48,6 @@ class CargarArchivo:
                         transaccion_id = transaccion.attrib['id']
                         nombre_transaccion = transaccion.find('nombre').text
                         tiempo = transaccion.find('tiempoAtencion').text
-                        print('tiempo =>', tiempo)
-                        print('id trans => ', transaccion_id)
                         empresa = self.lst_empresa.buscar_empresa(id_empresa)
                         empresa.lst_transacciones.agregar_transaccion(transaccion_id, nombre_transaccion, tiempo)
                 print('#¡EMPRESAS CARGADAS CON ÉXITO!#')            
@@ -72,9 +70,6 @@ class CargarArchivo:
                     id_configuracion_inicial = configuracion_inicial.attrib['id']
                     id_empresa = configuracion_inicial.attrib['idEmpresa']
                     id_punto = configuracion_inicial.attrib['idPunto']
-                    print('id configuracion inicial => ', id_configuracion_inicial)
-                    print('id empresa => ', id_empresa)
-                    print('id punto => ', id_punto)
                    
                     empresa = self.lst_empresa.buscar_empresa(id_empresa)
                     punto_atencion = empresa.lst_punto_atencion.buscar_punto_atencion(id_punto)
@@ -95,7 +90,6 @@ class CargarArchivo:
                         for cliente in lista_clientes:
                             dpi = cliente.attrib['dpi']
                             nombre_cliente = cliente.find('nombre').text
-                            print('nombre cliente =>', nombre_cliente)
                             punto_atencion.lst_clientes.agregar_cliente(dpi, nombre_cliente)
                             nodo_cliente =  punto_atencion.lst_clientes.buscar_cliente(dpi)
                             #TRANSACCIONES DE LOS CLIENTES
@@ -141,7 +135,38 @@ class CargarArchivo:
         
         finally:
             archivo_xml.close()
+    
+    
+    def atender_cliente(self, id_empresa, id_punto_atencion):
+        empresa = self.lst_empresa.buscar_empresa(id_empresa)
+        punto_atencion = empresa.lst_punto_atencion.buscar_punto_atencion(id_punto_atencion)
+        lst_escritorios_activos = punto_atencion.lst_escritorio.lista_escritorios_activos()
+        punto_atencion.lst_clientes.listar()
+        if punto_atencion.lst_escritorio.escritorios_activos() != 0:
+            
+            if len(lst_escritorios_activos) >= 1:
 
+                for escritorio in lst_escritorios_activos:
+                    cliente = punto_atencion.lst_clientes.atender()
+                    if cliente != None:
+                        print('-------------------------------------------')
+                        print(f'Cliente atendido: {cliente.nombre_cliente}')
+                        print(f'Por escritorio: {escritorio.id_escritorio}')
+                        print('-------------------------------------------')
+                        escritorio.lst_clientes_atendidos.agregar(cliente)
+                        #escritorio.lst_clientes_atendidos.imprimir()
+                    else: print('No hay más clientes por atender!')
+        else:
+            print('Por el momento no hay escritorios activos para atender a clientes!') 
+        
+                
+            
+        
+        
+        
+        
+        
+        
     def crear_empresa(self):
         print('---------------------------')
         id_empresa = input('Ingresa el id de la empresa: ')
@@ -156,7 +181,7 @@ class CargarArchivo:
             nombre_punto_atencion = input('Ingresa el nombre del punto de atencion: ')
             direccion_punto_atencion = input('Ingresa la direccion del punto de atencion: ')
             nodo_empresa.lst_punto_atencion.agregar(id_punto_atencion, nombre_punto_atencion, direccion_punto_atencion)
-            nodo_punto_atencion = nodo_empresa.lst_punto_atencion.buscar_punto_atencion(id_punto_atencion)
+            
             print('¿desea agregar mas puntos?')
             print('1. sí')
             print('2. no')
@@ -164,9 +189,30 @@ class CargarArchivo:
             
             if opcion_agregar_mas == '2':
                 break
-        print('A que punto de atención desear agregar escritorios')
-        nodo_empresa.lst_punto_atencion.recorrer()
-    
+        while True:        
+            print('-------------- Escritorios ------------------------')
+            nodo_empresa.lst_punto_atencion.recorrer()
+            id_punto_atencion = input('Ingresa el id del punto de atencion al que quieres agregar escritorios: ')
+            nodo_punto_atencion = nodo_empresa.lst_punto_atencion.buscar_punto_atencion(id_punto_atencion)
+            if nodo_punto_atencion != None:
+                id_escritorio = input('Ingresa el Id del escritorio que deseas agregar: ')
+                identificador = input('Ingresa el identificador: ')
+                encargado_escritorio = input('Ingresa el nombre del encargado: ')
+                print('Deseas que el escritorio este activo: ')
+                print('1. Sí')
+                print('2. No')
+                activado = input('Ingresa una respuesta: ')
+                if activado == '1':
+                    nodo_punto_atencion.lst_escritorio.agregar(id_escritorio,identificador, encargado_escritorio)
+                    nodo_escritorio = nodo_punto_atencion.lst_escritorio.buscar_escritorio(id_escritorio)
+                    nodo_escritorio.esta_activo = True
+                else:
+                    nodo_punto_atencion.lst_escritorio.agregar(id_escritorio,identificador, encargado_escritorio)
+                    nodo_escritorio = nodo_punto_atencion.lst_escritorio.buscar_escritorio(id_escritorio)
+            opcion = input('Desea agregar mas escritorios: \n 1. Sí \n 2. No \n')
+            if opcion == '2':
+                break
+            
     def elegir_empresa_punto_atencion(self):
         print('-------------Empresas------------------')
         self.lst_empresa.recorrer()
@@ -185,11 +231,50 @@ class CargarArchivo:
         print('Cantidad Escritorios Inactivos: ', punto_atencion_seleccionado.lst_escritorio.escritorios_desactivados())
         print('')
         print('Clientes en espera: ', punto_atencion_seleccionado.lst_clientes.clientes_en_espera())
+        print('')
+        print('-------------Opciones Punto de Atención--------------')
+        
+        while True:
+            print('1. Activar Escritorio')
+            print('2. Desactivar Escritorio')
+            print('3. Atender Cliente.')
+            print('4. Solicitud de Atención.')
+            print('5. Simular Actividad.')
+            print('6. Regresar')
+            opcion = int(input('Escoge una opcion: '))
+            if opcion == 1:
+                id_escritorio = input('Ingresa el Id del escritorio que deseas activar: ')
+                if punto_atencion_seleccionado.lst_escritorio.activar_escritorio(id_escritorio):
+                    print('#ESCRITORIO ACTIVADO CON EXITO#')
+                else: print('#EL ID NO CONCUERDA CON NINGUN ESCRITORIO O YA SE ENCUENTRA ACTIVO#')
+            if opcion == 2:
+                id_escritorio = input('Ingresa el Id del escritorio que deseas activar: ')
+                if punto_atencion_seleccionado.lst_escritorio.desactivar_escritorio(id_escritorio):
+                    print('#ESCRITORIO DESACTIVADO CON EXITO#')
+                else: print('#EL ID NO CONCUERDA CON NINGUN ESCRITORIO O YA SE ENCUENTRA DESACTIVADO#')
+            if opcion == 3:
+                self.atender_cliente(id_empresa, id_punto_atencion)
+            if opcion == 6:
+                break
+    
+    def crear_cliente(self, id_empresa, id_punto_atencion):
+        print('--------------AGREGAR CLIENTES-----------------')
+        nodo_empresa = self.lst_empresa.buscar_empresa(id_empresa)
+        nodo_punto_atencion = nodo_empresa.lst_punto_atencion.buscar_punto_atencion(id_punto_atencion)
+        while True:
+           dpi_cliente =  input('Ingresa el DPI del cliente: ')
+           nombre_cliente =   input('Ingresa el Nombre del cliente: ')
+           nodo_punto_atencion.lst_clientes.agregar_cliente(dpi_cliente, nombre_cliente)
+           opcion = input('¿Desea agregar mas clientes al punto? \n 1. Sí \n 2. No \n')
+           if opcion == '2':
+               break
+            
         
     
         
 
 cargar_archivo = CargarArchivo()
-cargar_archivo.cargar_archivo('codigo-fuente/entrada.xml')
+""" cargar_archivo.cargar_archivo('codigo-fuente/entrada.xml')
 cargar_archivo.cargar_archivo_configuracion('codigo-fuente/entrada_configuracion.xml')
+cargar_archivo.atender_cliente("1", "001") """
 #cargar_archivo.crear_empresa()

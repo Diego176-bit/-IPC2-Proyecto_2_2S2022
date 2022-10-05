@@ -18,6 +18,25 @@ class LstClientes:
             self.ultimo.siguiente = cliente
             self.ultimo = cliente
     
+    def atender(self):
+        if self.es_vacio() == False:
+            aux = self.primero
+            if self.primero == self.ultimo:
+                self.primero = None
+                self.ultimo = None
+            
+            else:
+                aux_cliente_dos = self.primero.siguiente
+                
+                #Actualizar tiempos en cola 
+                while aux_cliente_dos != None:
+                    aux_cliente_dos.tiempo_en_cola -= aux.tiempo_total
+                    aux_cliente_dos = aux_cliente_dos.siguiente
+                    
+                self.primero = self.primero.siguiente
+            return (aux)
+
+
     def buscar_cliente(self, dpi):
         aux_cliente = self.primero
         while aux_cliente != None:
@@ -125,4 +144,9 @@ class LstClientes:
             
             #print('tiempo max cola =>', aux.tiempo_max_cola)
             aux = aux.siguiente
-                
+    
+    def listar(self):
+        aux = self.primero
+        while aux != None:
+            print('nombre_cliente => ', aux.nombre_cliente)
+            aux = aux.siguiente
