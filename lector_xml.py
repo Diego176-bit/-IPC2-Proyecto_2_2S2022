@@ -142,9 +142,38 @@ class CargarArchivo:
         punto_atencion = empresa.lst_punto_atencion.buscar_punto_atencion(id_punto_atencion)
         lst_escritorios_activos = punto_atencion.lst_escritorio.lista_escritorios_activos()
         punto_atencion.lst_clientes.listar()
+        
         if punto_atencion.lst_escritorio.escritorios_activos() != 0:
             
-            if len(lst_escritorios_activos) >= 1:
+           
+
+                for i in range(0, len(lst_escritorios_activos)):
+                    cliente = punto_atencion.lst_clientes.atender()
+                    if cliente != None:
+                        print('-------------------------------------------')
+                        print(f'Cliente atendido: {cliente.nombre_cliente}')
+                        print(f'Por escritorio: {lst_escritorios_activos[i].id_escritorio}')
+                        print('-------------------------------------------')
+                        """ nodo_escritorio = punto_atencion.lst_escritorio.buscar_escritorio(escritorio.id_escritorio)
+                        nodo_escritorio.lst_clientes_atendidos.agregar(cliente) """
+                        lst_escritorios_activos[i].lst_clientes_atendidos.agregar(cliente)
+                        lst_escritorios_activos[i].lst_clientes_atendidos.graficar(lst_escritorios_activos[i].id_escritorio)
+                        #escritorio.lst_clientes_atendidos.imprimir()
+                        
+                    else: print('No hay más clientes por atender!')
+                    
+        else:
+            print('Por el momento no hay escritorios activos para atender a clientes!') 
+        
+    def automatizacion(self, id_empresa, id_punto_atencion):
+        empresa = self.lst_empresa.buscar_empresa(id_empresa)
+        punto_atencion = empresa.lst_punto_atencion.buscar_punto_atencion(id_punto_atencion)
+        lst_escritorios_activos = punto_atencion.lst_escritorio.lista_escritorios_activos()
+        punto_atencion.lst_clientes.listar()
+        
+        if punto_atencion.lst_escritorio.escritorios_activos() != 0:
+                ultimo_cliente = None
+           
 
                 for escritorio in lst_escritorios_activos:
                     cliente = punto_atencion.lst_clientes.atender()
@@ -153,16 +182,26 @@ class CargarArchivo:
                         print(f'Cliente atendido: {cliente.nombre_cliente}')
                         print(f'Por escritorio: {escritorio.id_escritorio}')
                         print('-------------------------------------------')
+                        """ nodo_escritorio = punto_atencion.lst_escritorio.buscar_escritorio(escritorio.id_escritorio)
+                        nodo_escritorio.lst_clientes_atendidos.agregar(cliente) """
                         escritorio.lst_clientes_atendidos.agregar(cliente)
+                        escritorio.lst_clientes_atendidos.graficar(escritorio.id_escritorio)
                         #escritorio.lst_clientes_atendidos.imprimir()
-                    else: print('No hay más clientes por atender!')
+                        ultimo_cliente = cliente
+                    else: 
+                        print('No hay más clientes por atender!')
+                        ultimo_cliente = None
+                        break
+                if ultimo_cliente != None:
+                    self.automatizacion(id_empresa, id_punto_atencion)
+                    
         else:
-            print('Por el momento no hay escritorios activos para atender a clientes!') 
-        
-                
+            print('Por el momento no hay escritorios activos para atender a clientes!')            
             
         
-        
+    def limpiar_sistema(self):
+        self.lst_empresa.primero = None
+        self.lst_empresa.ultimo = None  
         
         
         
@@ -254,6 +293,8 @@ class CargarArchivo:
                 else: print('#EL ID NO CONCUERDA CON NINGUN ESCRITORIO O YA SE ENCUENTRA DESACTIVADO#')
             if opcion == 3:
                 self.atender_cliente(id_empresa, id_punto_atencion)
+            if opcion == 5:
+                self.automatizacion(id_empresa, id_punto_atencion)
             if opcion == 6:
                 break
     
@@ -268,6 +309,9 @@ class CargarArchivo:
            opcion = input('¿Desea agregar mas clientes al punto? \n 1. Sí \n 2. No \n')
            if opcion == '2':
                break
+    
+    
+        
             
         
     

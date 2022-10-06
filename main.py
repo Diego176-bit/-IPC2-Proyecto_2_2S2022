@@ -12,7 +12,8 @@ class Main:
             print('1. Configuracion de empresa')
             print('2. Seleccionar Empresa')
             print('3. Cargar archivo con configuración inicial para la prueba.')
-            print('4  Salir.')
+            print('4  Limpiar Sistema.')
+            print('5. Salir')
             opcion = int(input('Escoge un opcion: '))
             try:
                 if opcion == 1:
@@ -22,6 +23,8 @@ class Main:
                 if opcion == 3:
                     cargar_archivo.cargar_archivo_configuracion()
                 if opcion == 4:
+                    cargar_archivo.limpiar_sistema()
+                if opcion == 5:
                     salir = False
             
             except Exception as e:

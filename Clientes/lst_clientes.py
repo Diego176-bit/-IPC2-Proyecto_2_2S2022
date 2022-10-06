@@ -35,6 +35,7 @@ class LstClientes:
                     
                 self.primero = self.primero.siguiente
             return (aux)
+        return None
 
 
     def buscar_cliente(self, dpi):
